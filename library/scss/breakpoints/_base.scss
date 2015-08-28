@@ -16,11 +16,11 @@ GENERAL STYLES
 *********************/
 
 body {
-	font-family: $lato;
+	font-family: $proxima-nova;
 	font-size: 100%;
 	line-height: 1.5;
 	color: $text-color;
-	background-color: $gray;
+	background: url('../images/bg.jpg') top center;
   	-webkit-font-smoothing: antialiased;
   	-moz-osx-font-smoothing: grayscale;
 }
@@ -110,6 +110,7 @@ H1, H2, H3, H4, H5 STYLES
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 	text-rendering: optimizelegibility;
 	font-weight: 500;
+	font-family: "brandon-grotesque", $proxima-nova, sans-serif;
 	/*
 	if you're going to use webfonts, be sure to check your weights
 	http://css-tricks.com/watch-your-font-weight/
@@ -157,7 +158,8 @@ HEADER STYLES
 }
 
 	#logo {
-		margin: 0.75em 0;
+		margin: .75em 0;
+		text-align: center;
 
 		a {
 			color: $white;
@@ -187,6 +189,10 @@ and more scalable.
 			color: $white;
 			text-decoration: none;
 			padding: 0.75em;
+			font-size: 1.2em;
+			font-family: "brandon-grotesque", $sans-serif;
+			font-weight: 400;
+			text-transform: uppercase;
 
 			/*
 			remember this is for mobile ONLY, so there's no need
@@ -251,24 +257,35 @@ and more scalable.
 POSTS & CONTENT STYLES
 *********************/
 
+.section-header {
+	@include ir;
+	display: block;
+	width: 100%;
+	height: 38px;
+	margin: 0;
+	background: url('../images/newsHeader.png') top left no-repeat;
+}
+
 #content {
-	margin-top: 1.5em;
+	// padding-top: 1.5em;
+}
+
+#inner-content {
+	background: white;
+	padding-top: 1.5em;
 }
 
 		.hentry {
-			background-color: $white;
-			border-radius: 3px;
 			margin-bottom: 1.5em;
-			border: 1px solid $border-color;
 
 			header {
-				border-bottom: 1px solid $light-gray;
-				padding: 1.5em;
+				//border-bottom: 1px solid $light-gray;
+				padding: 1.5em 0;
 			}
 
 			footer {
-				padding: 1.5em;
-				border-top: 1px solid $light-gray;
+				padding: 1.5em 0;
+				//border-top: 1px solid $light-gray;
 
 				p {
 					margin: 0;
@@ -303,8 +320,9 @@ POSTS & CONTENT STYLES
 
 		/* post meta */
 		.byline {
-			color: $meta-gray;
-			font-style: italic;
+			color: black; //$meta-gray;
+			font-size: 13px;
+			font-weight: bold;
 			margin: 0;
 
 			time {}
@@ -312,7 +330,8 @@ POSTS & CONTENT STYLES
 
 		/* entry content */
 		.entry-content {
-			padding: 1.5em 1.5em 0;
+			padding: 0;
+			padding-bottom: 1.5em;
 
 			p {
 				margin: 0 0 1.5em;
@@ -854,6 +873,14 @@ SIDEBARS & ASIDES
 		border: 1px solid $border-color;
 		border-radius: 2px;
 		margin-bottom: 1.5em;
+	}
+
+	#text-2 h4 {
+		@include ir;
+		display: block;
+		width: 100%;
+		height: 38px;
+		background: url('../images/showsSidebarHeader.png') bottom left no-repeat;
 	}
 
 /*********************

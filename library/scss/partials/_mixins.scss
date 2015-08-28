@@ -71,3 +71,11 @@ probably best not to use it. I mean, were you going to anyway? */
 }
 
 
+/*******************
+Image Replacement
+*******************/
+@mixin ir{
+    font: 0/0 a;
+    text-shadow: none;
+    color: transparent;
+}

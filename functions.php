@@ -12,7 +12,10 @@ sidebars, comments, etc.
 require_once( 'library/bones.php' );
 
 // CUSTOMIZE THE WORDPRESS ADMIN (off by default)
-// require_once( 'library/admin.php' );
+require_once( 'library/admin.php' );
+
+// COMPOSER INLCUDES
+require_once( 'includes/vendor/autoload.php' );
 
 /*********************
 LAUNCH BONES
@@ -28,7 +31,7 @@ function bones_ahoy() {
   load_theme_textdomain( 'bonestheme', get_template_directory() . '/library/translation' );
 
   // USE THIS TEMPLATE TO CREATE CUSTOM POST TYPES EASILY
-  require_once( 'library/custom-post-type.php' );
+  // require_once( 'library/custom-post-type.php' );
 
   // launching operation cleanup
   add_action( 'init', 'bones_head_cleanup' );
@@ -243,5 +246,74 @@ function bones_fonts() {
 }
 
 add_action('wp_enqueue_scripts', 'bones_fonts');
+
+
+/**
+ * TypeKit Fonts
+ *
+ * @since Theme 1.0
+ */
+function theme_typekit() {
+    wp_enqueue_script( 'theme_typekit', '//use.typekit.net/urj0rle.js');
+}
+add_action( 'wp_enqueue_scripts', 'theme_typekit' );
+
+function theme_typekit_inline() {
+  if ( wp_script_is( 'theme_typekit', 'done' ) ) { ?>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<?php }
+}
+add_action( 'wp_head', 'theme_typekit_inline' );
+
+
+// Hide Admin Bar
+add_filter('show_admin_bar', '__return_false');
+
+// Royal Slider
+register_new_royalslider_files(1);
+
+// Register Gigs Post Type
+$gigs = new CPT('gig', array(
+  'supports' => array( 'title', 'thumbnail' )
+));
+
+$gigs->columns(array(
+  'cb' => '<input type="checkbox" />',
+  'title' => __('Title'),
+  'gig_date' => __('Date'),
+  'venue' => __('Venue'),
+  'city' => __('City'),
+  'state' => __('State'),
+));
+
+$gigs->populate_column('gig_date', function($column, $post) {
+  echo get_field('gig_date');
+});
+
+$gigs->populate_column('venue', function($column, $post) {
+  echo get_field('gig_venue');
+});
+
+$gigs->populate_column('city', function($column, $post) {
+  echo get_field('gig_city');
+});
+
+$gigs->populate_column('state', function($column, $post) {
+  echo get_field('gig_state');
+});
+
+$gigs->sortable(array(
+  'date' => array('meta_key', true)
+));
+
+// get_the_field instance
+function get_the_field($thefield)
+{
+  if ( get_field( $thefield ) ) : 
+  {
+    return the_field($thefield);
+  }
+  endif;
+}
 
 /* DON'T DELETE THIS CLOSING TAG */ ?>

@@ -27,13 +27,36 @@ LAYOUT & GRID STYLES
 	width: 760px;
 }
 
+.single .post {
+	margin-top: 3.5em;
+}
+
 /*********************
 HEADER STYLES
 *********************/
 
-.header {}
+.header {
+	position: relative;
+	//height: 110px;
+	background: #393939;
+	z-index: 1;
+}
 
-	#logo {}
+	#logo {
+		margin: 0;
+		margin-top: .25em;
+		img {
+			margin-left: -12px;
+		}
+	}
+
+	.slider {
+		max-width: 960px;
+		margin: 0 auto;
+		// margin-top: 24px;
+		z-index: 0;
+		border: 15px solid #fff;
+	}
 
 /*********************
 NAVIGATION STYLES
@@ -41,13 +64,20 @@ NAVIGATION STYLES
 
 .nav {
 	border: 0;
-	ul {
-		background:$black;
-		margin-top:0;
-	}
+	text-align: center;
+	margin-top: -125px;
 	li {
-		float: left;
+		display: inline-block;
 		position: relative;
+		text-align: center;
+		&:nth-child(3) {
+			padding-right: 100px;
+			text-align: right;
+		}
+		&:nth-child(4) {
+			padding-left: 200px;
+			text-align: right;
+		}
 
 		a {
 			border-bottom: 0;
@@ -57,8 +87,8 @@ NAVIGATION STYLES
 			has the possibility of being a mobile device.
 			*/
 			&:hover, &:focus {
-				color: $white;
-				text-decoration: underline;
+				color: $link-color;
+				text-decoration: none;
 			}
 		}
 
@@ -141,18 +171,23 @@ NAVIGATION STYLES
 SIDEBARS & ASIDES
 *********************/
 
+.single #sidebar1 {
+	margin-top: 3.2em;
+}
+
 .sidebar {
 	margin-top: 2.2em;
 }
 
 	.widgettitle {
-		border-bottom: 2px solid #444;
-		margin-bottom: 0.75em;
+		//border-bottom: 2px solid #444;
+		margin-bottom: 1.5em;
+		margin-top: 0;
 	}
 
 	.widget {
 		padding: 0 10px;
-		margin: 2.2em 0;
+		margin: 0;
 
 		ul {
 			li {
@@ -171,6 +206,9 @@ SIDEBARS & ASIDES
 		}
 	}
 
+	.textwidget {
+		margin-top: 1.5em;
+	}
 
 	/* links widget */
 	.widget_links {}

@@ -116,5 +116,9 @@ jQuery(document).ready(function($) {
   */
   loadGravatars();
 
+  $('.home .entry-content').readmore({
+    speed: 500,
+    lessLink: '<a href="#">Read Less</a>'
+  });
 
 }); /* end of as page load scripts */

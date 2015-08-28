@@ -5,6 +5,10 @@
 ############
 
 Bones.esproj/
+node_modules/
+.sass-cache
+includes/vendor/
+includes/composer.lock
 
 ############
 ## IDEs
