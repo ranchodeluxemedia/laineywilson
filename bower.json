@@ -1,0 +1,24 @@
+{
+  "name": "laineywilson",
+  "version": "0.0.0",
+  "homepage": "https://github.com/eddiemachado/bones",
+  "authors": [
+    "Chris Canterbury <chris@ranchodeluxemedia.com>"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "geomicons-open": "~2.0.0",
+    "plangular": "~3.1.2"
+  }
+}

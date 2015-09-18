@@ -9,10 +9,13 @@ sidebars, comments, etc.
 */
 
 // LOAD BONES CORE (if you remove this, the theme will break)
-require_once( 'library/bones.php' );
+require_once( 'assets/bones.php' );
+
+// LOAD SCRIPTS
+require_once( 'assets/scripts.php' );
 
 // CUSTOMIZE THE WORDPRESS ADMIN (off by default)
-require_once( 'library/admin.php' );
+require_once( 'assets/admin.php' );
 
 // COMPOSER INLCUDES
 require_once( 'includes/vendor/autoload.php' );
@@ -25,13 +28,13 @@ Let's get everything up and running.
 function bones_ahoy() {
 
   //Allow editor style.
-  add_editor_style( get_stylesheet_directory_uri() . '/library/css/editor-style.css' );
+  add_editor_style( get_stylesheet_directory_uri() . '/assets/css/editor-style.css' );
 
   // let's get language support going, if you need it
-  load_theme_textdomain( 'bonestheme', get_template_directory() . '/library/translation' );
+  load_theme_textdomain( 'bonestheme', get_template_directory() . '/assets/translation' );
 
   // USE THIS TEMPLATE TO CREATE CUSTOM POST TYPES EASILY
-  // require_once( 'library/custom-post-type.php' );
+  require_once( 'assets/post-types-custom.php' );
 
   // launching operation cleanup
   add_action( 'init', 'bones_head_cleanup' );
@@ -163,8 +166,8 @@ function bones_register_sidebars() {
 		'description' => __( 'The first (primary) sidebar.', 'bonestheme' ),
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div>',
-		'before_title' => '<h4 class="widgettitle">',
-		'after_title' => '</h4>',
+		'before_title' => '<div class="section-header"><span class="sh-title">',
+		'after_title' => '</span></div>',
 	));
 
 	/*
@@ -213,7 +216,7 @@ function bones_comments( $comment, $args, $depth ) {
           // create variable
           $bgauthemail = get_comment_author_email();
         ?>
-        <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( $bgauthemail ); ?>?s=40" class="load-gravatar avatar avatar-48 photo" height="40" width="40" src="<?php echo get_template_directory_uri(); ?>/library/images/nothing.gif" />
+        <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( $bgauthemail ); ?>?s=40" class="load-gravatar avatar avatar-48 photo" height="40" width="40" src="<?php echo get_template_directory_uri(); ?>/assets/images/nothing.gif" />
         <?php // end custom gravatar call ?>
         <?php printf(__( '<cite class="fn">%1$s</cite> %2$s', 'bonestheme' ), get_comment_author_link(), edit_comment_link(__( '(Edit)', 'bonestheme' ),'  ','') ) ?>
         <time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>"><?php comment_time(__( 'F jS, Y', 'bonestheme' )); ?> </a></time>
@@ -254,7 +257,7 @@ add_action('wp_enqueue_scripts', 'bones_fonts');
  * @since Theme 1.0
  */
 function theme_typekit() {
-    wp_enqueue_script( 'theme_typekit', '//use.typekit.net/urj0rle.js');
+    wp_enqueue_script( 'theme_typekit', '//use.typekit.net/rck0dci.js');
 }
 add_action( 'wp_enqueue_scripts', 'theme_typekit' );
 
@@ -272,39 +275,6 @@ add_filter('show_admin_bar', '__return_false');
 // Royal Slider
 register_new_royalslider_files(1);
 
-// Register Gigs Post Type
-$gigs = new CPT('gig', array(
-  'supports' => array( 'title', 'thumbnail' )
-));
-
-$gigs->columns(array(
-  'cb' => '<input type="checkbox" />',
-  'title' => __('Title'),
-  'gig_date' => __('Date'),
-  'venue' => __('Venue'),
-  'city' => __('City'),
-  'state' => __('State'),
-));
-
-$gigs->populate_column('gig_date', function($column, $post) {
-  echo get_field('gig_date');
-});
-
-$gigs->populate_column('venue', function($column, $post) {
-  echo get_field('gig_venue');
-});
-
-$gigs->populate_column('city', function($column, $post) {
-  echo get_field('gig_city');
-});
-
-$gigs->populate_column('state', function($column, $post) {
-  echo get_field('gig_state');
-});
-
-$gigs->sortable(array(
-  'date' => array('meta_key', true)
-));
 
 // get_the_field instance
 function get_the_field($thefield)
@@ -315,5 +285,54 @@ function get_the_field($thefield)
   }
   endif;
 }
+
+if ( function_exists('acf_add_options_page') ) {
+  acf_add_options_page();
+  acf_add_options_sub_page('General');
+}
+
+// Makes image link none by default
+update_option('image_default_link_type', 'none' );
+
+// remove the p from around imgs (http://css-tricks.com/snippets/wordpress/remove-paragraph-tags-from-around-images/)
+function filter_ptags_on_images($content){
+   return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+}
+
+add_filter('the_content', 'filter_ptags_on_images');
+
+//Replaces "current-menu-item" with "active"
+function current_to_active($text){
+        $replace = array(
+                //List of menu item classes that should be changed to "active"
+                'current_page_item' => 'active',
+                'current_page_parent' => 'active',
+                'current_page_ancestor' => 'active',
+        );
+        $text = str_replace(array_keys($replace), $replace, $text);
+                return $text;
+        }
+add_filter ('wp_nav_menu','current_to_active');
+
+// Nicer Pagination
+function site_page_navi() {
+  global $wp_query;
+  $bignum = 999999999;
+  if ( $wp_query->max_num_pages <= 1 )
+    return;
+  echo '<nav class="pagination">';
+  echo paginate_links( array(
+    'base'         => str_replace( $bignum, '%#%', esc_url( get_pagenum_link($bignum) ) ),
+    'format'       => '',
+    'current'      => max( 1, get_query_var('paged') ),
+    'total'        => $wp_query->max_num_pages,
+    'prev_text'    => '&larr;',
+    'next_text'    => '&rarr;',
+    'type'         => 'list',
+    'end_size'     => 3,
+    'mid_size'     => 3
+  ) );
+  echo '</nav>';
+} /* end page navi */
 
 /* DON'T DELETE THIS CLOSING TAG */ ?>

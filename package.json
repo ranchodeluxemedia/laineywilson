@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/eddiemachado/bones/issues"
   },
-  "homepage": "https://github.com/eddiemachado/bones#readme"
+  "homepage": "https://github.com/eddiemachado/bones#readme",
+  "dependencies": {
+    "soundcloud-audio": "^0.1.4"
+  },
+  "devDependencies": {
+    "gulp-minify-css": "^1.2.1",
+    "gulp-rename": "^1.2.2",
+    "soundcloud-audio": "^0.1.4"
+  }
 }

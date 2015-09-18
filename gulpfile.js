@@ -1,16 +1,18 @@
 'use strict';
 
+module.exports = gulp;
+
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var prefix = require('gulp-autoprefixer');
 
 gulp.task('sass', function() {
-    gulp.src('./library/scss/**/*.scss')
+    gulp.src('./assets/scss/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(prefix("last 1 version", "> 1%", "ie 8"))
-    .pipe(gulp.dest('./library/css'));
+    .pipe(gulp.dest('./assets/css'));
 });
 
 gulp.task('default', function() {
-    gulp.watch('./library/scss/**/*.scss', ['sass']);
+    gulp.watch('./assets/scss/**/*.scss', ['sass']);
 });

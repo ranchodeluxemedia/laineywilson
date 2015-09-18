@@ -7,7 +7,6 @@
         }
     ],
     "require": {
-      "jjgrainger/wp-custom-post-type-class": "dev-master",
-        "willdurand/geocoder": "^3.1"
+      "jjgrainger/wp-custom-post-type-class": "dev-master"
     }
 }

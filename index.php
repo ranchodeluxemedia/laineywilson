@@ -6,7 +6,13 @@
 
 						<main id="main" class="grid-4 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
 
-						<h1 class="section-header">Latest News</h1>
+						<div class="section-header">
+							<!-- <i class="ion-clock"></i> -->
+							<span class="sh-title">Latest News</span>
+							<span class="sh-links">
+								<a href="/news" class="shl-viewall">View All</a>
+							</span>
+						</div>
 
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -16,21 +22,22 @@
 
 									<h1 class="h2 entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
 									<p class="byline entry-meta vcard">
-                                                                        <?php printf( __( 'Posted', 'bonestheme' ).' %1$s %2$s',
-                       								/* the time the post was published */
-                       								'<time class="updated entry-time" datetime="' . get_the_time('Y-m-d') . '" itemprop="datePublished">' . get_the_time(get_option('date_format')) . '</time>',
-                       								/* the author of the post */
-                       								'<span class="by">'.__( 'by', 'bonestheme').'</span> <span class="entry-author author" itemprop="author" itemscope itemptype="http://schema.org/Person">' . get_the_author_link( get_the_author_meta( 'ID' ) ) . '</span>'
-                    							); ?>
+										<?php the_time( get_option( 'date_format' ) ); ?>
 									</p>
+									<div class="divider"></div>
 
 								</header>
 
 								<section class="entry-content cf">
-									<?php the_content(); ?>
+									<?php the_excerpt(); ?>
 								</section>
 
 							</article>
+
+							<?php // Custom Post divider
+										if ( ($wp_query->current_post +1 ) < ($wp_query->post_count)) {
+											echo '<div class="post-divider"></div>';
+							} ?>
 
 							<?php endwhile; ?>
 

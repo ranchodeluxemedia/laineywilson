@@ -18,4 +18,26 @@
 
 					<?php endif; ?>
 
+					<div class="sidebar-container">
+						<div class="section-header">
+							<!-- <i class="ion-clock"></i> -->
+							<span class="sh-title">Instagram</span>
+							<span class="sh-links">
+								<a href="#" class="shl-viewall">View More</a>
+							</span>
+						</div>
+						<div id="instafeed"></div>
+					</div>
+					<div class="sidebar-container">
+						<div class="section-header">
+							<!-- <i class="ion-clock"></i> -->
+							<span class="sh-title">Twitter</span>
+							<span class="sh-links">
+								<a href="#" class="shl-viewall">Follow</a>
+							</span>
+						</div>
+						<p>
+							<?php if ( function_exists('display_tweets') ) { display_tweets(); } ?>
+						</p>
+					</div>
 				</div>

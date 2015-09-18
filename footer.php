@@ -1,4 +1,4 @@
-			<footer class="footer" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
+			<footer class="footer cf" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
 
 				<div id="inner-footer" class="wrap cf">
 
@@ -26,7 +26,7 @@
 
 		</div>
 
-		<?php // all js scripts are loaded in library/bones.php ?>
+		<?php // all js scripts are loaded in assets/bones.php ?>
 		<?php wp_footer(); ?>
 
 	</body>

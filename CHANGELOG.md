@@ -250,7 +250,7 @@ Author: Eddie Machado
 - moved the custom script call and pngfix to the footer
 	from the bones file so it's easier to see what's being
 	called.
-- moved apple-touch-icon.png to the library/images folder so
+- moved apple-touch-icon.png to the assets/images folder so
 	file locations are consistent.
 - added a log file to keep track of changes
 - fixed html5 video functionality & fallback (w00t!)

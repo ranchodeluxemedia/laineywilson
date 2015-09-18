@@ -1,0 +1,19 @@
+{
+  "name": "geomicons-open",
+  "version": "2.0.0",
+  "description": "Open Source Icons for the Web",
+  "main": [
+    "dist/geomicons.min.js"
+  ],
+  "homepage": "https://github.com/jxnblk/geomicons-open",
+  "_release": "2.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.0",
+    "commit": "36e3e49d9949f83234558bbafaa6fe4f7dc0a46f"
+  },
+  "_source": "git://github.com/jxnblk/geomicons-open.git",
+  "_target": "~2.0.0",
+  "_originalSource": "geomicons-open",
+  "_direct": true
+}

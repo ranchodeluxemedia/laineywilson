@@ -1,12 +1,11 @@
 /******************************************************************
-Theme Name: Lainey Wilson Website
+Theme Name: LaineyWilson
 Theme URI: http://www.laineywilson.com
 Description: Custom website for Lainey Wilson Music.
 Author: Rancho Deluxe Media
 Author URI: http://www.ranchodeluxemedia.com
 Version: 1.0
-Tags: custom-layout
-
+Text Domain: laineywilson
 License: WTFPL
 License URI: http://sam.zoy.org/wtfpl/
 Are You Serious? Yes.
@@ -15,3 +14,6 @@ Are You Serious? Yes.
 .sticky {}          /* DO NOT EDIT THIS */
 .gallery-caption {} /* THESE ARE USELESS */
 .bypostauthor {}    /* THEY ARE ONLY TO KEEP THEME CHECK HAPPY */
+.screen-reader-text {}
+.screen-reader-text:focus {}
+

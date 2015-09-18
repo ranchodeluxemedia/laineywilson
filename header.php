@@ -19,17 +19,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 		<?php // icons & favicons (for more: http://www.jonathantneal.com/blog/understand-the-favicon/) ?>
-		<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/library/images/apple-touch-icon.png">
+		<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/apple-touch-icon.png">
 		<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/favicon.png">
 		<!--[if IE]>
 			<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">
 		<![endif]-->
 		<?php // or, set /favicon.ico for IE10 win ?>
 		<meta name="msapplication-TileColor" content="#f01d4f">
-		<meta name="msapplication-TileImage" content="<?php echo get_template_directory_uri(); ?>/library/images/win8-tile-icon.png">
+		<meta name="msapplication-TileImage" content="<?php echo get_template_directory_uri(); ?>/assets/images/win8-tile-icon.png">
             <meta name="theme-color" content="#121212">
 
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
 
 		<?php // wordpress head functions ?>
 		<?php wp_head(); ?>
@@ -40,43 +43,73 @@
 
 	</head>
 
-	<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
+	<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage" ng-app="app">
+
+  <script>
+  var app = angular.module('app', ['plangular'])
+    .config(function(plangularConfigProvider){
+      plangularConfigProvider.clientId = '907a5e05cc762d441c0229e4eff2a408'
+    });
+  </script>
+  <script>
+    var icons = document.querySelectorAll('.js-geomicon');
+    geomicons.inject(icons);
+  </script>
 
 		<div id="container">
 
 			<header class="header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 
+        <!-- Start Topbar Header -->
+        <div id="topbar" class="cf">
+          <div id="inner-topbar" class="wrap cf">
+            <div id="topbar-first" class="grid-3 first cf audio-player" plangular="https://soundcloud.com/chriscanterbury/sets/the-other-side-ep">
+            <span><a ng-click="playPause(index)">
+              <i ng-if="player.playing !== track.src" class="fa fa-play"></i>
+              <i ng-if="player.playing === track.src" class="fa fa-pause"></i>
+            </a></span>
+            <span><a ng-click="next()"><i class="fa fa-forward"></i></a></span>
+            <span style="font-family: 'ambroise-std';">{{ track.title }} - {{ currentTime | hhmmss}} | {{ duration | hhmmss }} </span>
+            
+            </div>
+            
+            <div id="topbar-last" class="grid-3 last cf">
+              <span>CLick here for social media!</span>
+            </div>
+          </div>
+        </div>
+
 				<div id="inner-header" class="wrap cf">
 
 					<?php // to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> ?>
-					<p id="logo" class="h1" itemscope itemtype="http://schema.org/Organization">
-                        <img src="<?php echo get_template_directory_uri(); ?>/library/images/headerLogo.png">               
-                    </p>
+					
+         <div id="logo" class="cf">
+           <img src="<?php echo get_template_directory_uri(); ?>/assets/images/siteLogo.png">
+         </div>           
+
 
 					<?php // if you'd like to use the site description you can un-comment it below ?>
 					<?php // bloginfo('description'); ?>
 
-
-					<nav role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
-						<?php wp_nav_menu(array(
-    					         'container' => false,                           // remove nav container
-    					         'container_class' => 'menu cf',                 // class of container (should you choose to use it)
-    					         'menu' => __( 'The Main Menu', 'bonestheme' ),  // nav name
-    					         'menu_class' => 'nav top-nav cf',               // adding custom nav class
-    					         'theme_location' => 'main-nav',                 // where it's located in the theme
-    					         'before' => '',                                 // before the menu
-        			               'after' => '',                                  // after the menu
-        			               'link_before' => '',                            // before each link
-        			               'link_after' => '',                             // after each link
-        			               'depth' => 0,                                   // limit the depth of the nav
-    					         'fallback_cb' => ''                             // fallback function (if there is one)
-						)); ?>
-
-					</nav>
+          <div class="navbar">
+            <ul id="menu">
+              <li><a href="<?php bloginfo('url'); ?>/">Home</a></li>
+              <li><a href="<?php bloginfo('url'); ?>/bio">Bio</a></li>
+              <li><a href="<?php bloginfo('url'); ?>/shows">Shows</a></li>
+              <li><a href="<?php bloginfo('url'); ?>/media">Media</a></li>
+              <li><a href="<?php bloginfo('url'); ?>/music">Music</a></li>
+              <li><a href="<?php bloginfo('url'); ?>/store">Store</a></li>
+              <!-- <li><a href="<?php // bloginfo('url'); ?>/connect">Connect</a></li> -->
+              <li><a href="<?php bloginfo('url'); ?>/contact">Contact</a></li>
+            </ul>
+          </div>
 
 				</div>
 
+
 			</header>
+      <div class="header-border"></div>
+
             <?php if (is_front_page()) { ?>
 
             <div class="slider">
